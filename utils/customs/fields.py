@@ -1,8 +1,6 @@
 import os
 from dataclasses import dataclass
 from typing import Any, Dict
-
-from PIL import Image
 from pydantic import GetCoreSchemaHandler, GetJsonSchemaHandler
 from pydantic_core import CoreSchema, core_schema
 from sqlalchemy import String
@@ -11,8 +9,6 @@ from starlette.datastructures import UploadFile
 
 from src.config import SETTINGS
 from src.config.storages import LOCAL_STORAGE
-
-SUPPORTED_IMAGE_EXTENSIONS = Image.registered_extensions()
 
 
 @dataclass

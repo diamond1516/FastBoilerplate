@@ -33,7 +33,6 @@ class Server:
     def get_app(self):
         return self.__app
 
-
     @staticmethod
     def __register_events(app: FastAPI):
         app.on_event('startup')(on_startup)

@@ -1,0 +1,10 @@
+fastapi[standard]
+sqlalchemy[asyncio]
+alembic
+asyncpg
+pydantic
+pydantic-settings
+werkzeug
+black
+fastapi-pagination
+fastapi-filter[sqlalchemy]

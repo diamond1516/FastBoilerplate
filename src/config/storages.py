@@ -4,6 +4,11 @@ import string
 from abc import ABC, abstractmethod
 from werkzeug.utils import secure_filename
 from src.config import SETTINGS
+from typing import Union, TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from starlette.datastructures import UploadFile
+    from utils.customs import FileObject
 
 
 class StorageManager(ABC):
@@ -28,7 +33,7 @@ class StorageManager(ABC):
 
 class LocalStorageManager(StorageManager):
 
-    def save(self, file, upload_folder):
+    def save(self, file: Union['UploadFile', 'FileObject'], upload_folder):
 
         new_filename = self._generate_new_filename(secure_filename(file.filename))
         folder_path = os.path.join(self.MEDIA_URL, upload_folder)

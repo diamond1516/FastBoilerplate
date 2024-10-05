@@ -1,14 +1,16 @@
 import os
 import random
 import string
+import shutil
 from abc import ABC, abstractmethod
-from werkzeug.utils import secure_filename
-from aiofiles import open as aio_open
-from src.config import SETTINGS
 from typing import Union, TYPE_CHECKING
 
+from starlette.datastructures import UploadFile
+from werkzeug.utils import secure_filename
+
+from src.config import SETTINGS
+
 if TYPE_CHECKING:
-    from starlette.datastructures import UploadFile
     from utils.customs import FileObject
 
 
@@ -41,10 +43,14 @@ class LocalStorageManager(StorageManager):
         file_path = os.path.join(folder_path, new_filename)
         os.makedirs(folder_path, exist_ok=True)
 
-        with open(file_path, 'wb') as f:
-            f.write(file.file.read())
+        if isinstance(file, UploadFile):
+            with open(file_path, 'wb') as f:
+                f.write(file.file.read())
+            return file_path.replace(self.MEDIA_URL, '')
 
-        return file_path.replace(self.MEDIA_URL, '')
+        elif isinstance(file, FileObject):
+            path = file.path
+            pass
 
     def delete(self, path):
         file_path = os.path.join(self.MEDIA_URL, path)
@@ -53,4 +59,3 @@ class LocalStorageManager(StorageManager):
 
 
 LOCAL_STORAGE = LocalStorageManager()
-

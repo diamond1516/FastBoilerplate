@@ -7,8 +7,7 @@ class Base(DeclarativeBase):
 
     @declared_attr.directive
     def __tablename__(cls) -> str:
-        name = str(cls.__name__)
-        return ''.join(['_' + c.lower() if c.isupper() else c for c in name]).lstrip('_') + 's'
+        return str(cls.__name__) + 's'
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
 

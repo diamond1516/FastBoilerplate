@@ -5,6 +5,7 @@ from src.config import secures
 
 
 class Settings(BaseSettings):
+    VERSION: str = '0.1.0'
     API_V1_STR: str = "/api/v1"
     WS_PREFIX: str = '/ws'
     ACCESS_TOKEN_EXPIRE: timedelta = timedelta(days=1)

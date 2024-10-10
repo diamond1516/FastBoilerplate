@@ -7,6 +7,7 @@ def app(_=None) -> FastAPI:
     main = FastAPI(
         title=SETTINGS.PROJECT_NAME,
         debug=SETTINGS.DEBUG,
+        version=SETTINGS.VERSION
     )
 
     @main.get('/', include_in_schema=False)
